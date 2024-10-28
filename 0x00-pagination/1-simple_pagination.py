@@ -1,26 +1,24 @@
 #!/usr/bin/env python3
 """
-Module to provide pagination functionality for a dataset of popular baby names.
-"""
+Python module that orchestrates the use of pagination"""
 
 import csv
 import math
-from typing import List
+from typing import Tuple, List
 
 
-def index_range(page: int, page_size: int) -> tuple:
-    """
-    Calculate the start and end index for pagination.
-
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """ Function calculating start and end indexes for pagination
     Args:
-        page (int): The page number (1-indexed).
-        page_size (int): The number of items per page.
+        page: int representing the current page number (1-indexed).
+        page_size: int representing number of items per page.
 
     Returns:
-        tuple: A tuple containing the start and end index.
-    """
+        Tuple of size 2 containing start and end index for current page """
+
     start_index = (page - 1) * page_size
     end_index = start_index + page_size
+
     return (start_index, end_index)
 
 
@@ -39,35 +37,24 @@ class Server:
             with open(self.DATA_FILE) as f:
                 reader = csv.reader(f)
                 dataset = [row for row in reader]
-            self.__dataset = dataset[1:]  # Skip the header
+            self.__dataset = dataset[1:]
 
-        return (self.__dataset)
+        return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """
-        Get a page of the dataset.
-
+        """Get a specific page from the dataset based on pagination parameters.
         Args:
-            page (int): The page number (1-indexed).
-            page_size (int): The number of items per page.
+            page: int representing the current page number (1-indexed).
+            page_size: int representing number of items per page.
 
         Returns:
-            List[List]: A list of rows for the specified page.
-        """
-        # Validate input
-        assert (isinstance(page, int) and
-                page > 0, "page must be a positive integer")
-        assert (isinstance(page_size, int) and
-                page_size > 0, "page_size must be a positive integer")
+            list of dict rep rows of data for the specified page.
+            If input args are out of range for dataset, return empty list"""
 
-        # Calculate the start and end indices
-        start_index, end_index = index_range(page, page_size)
-
-        # Retrieve the dataset
-        dataset = self.dataset()
-
-        # Return the appropriate page of the dataset
-        if start_index >= len(dataset):
-            return ([])  # Return empty list if the start index out of range
-
-        return (dataset[start_index:end_index])
+        assert(isinstance(page, int) and isinstance(page_size, int))
+        assert(page > 0 and page_size > 0)
+        start, end = index_range(page, page_size)
+        data = self.dataset()
+        if start > len(data):
+            return []
+        return data[start: end]
