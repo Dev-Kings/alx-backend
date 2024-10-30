@@ -33,7 +33,7 @@ class LFUCache(BaseCaching):
                 # LFU eviction: Remove the least frequency used item
                 k_v = self.frequency.items()
                 min_freq_keys = \
-                    [key for key, freq in k_v  if freq == self.min_frequency]
+                    [key for key, freq in k_v if freq == self.min_frequency]
                 lru_key = \
                     min(min_freq_keys, key=lambda k: self.used_order.index(k))
                 del self.cache_data[lru_key]
