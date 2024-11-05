@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Module containing index method.
+Module containing single route that renders an HTML page.
 """
+
 from flask import Flask, render_template
 
 
@@ -9,8 +10,13 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-    """Render welcome page."""
+def index() -> str:
+    """
+    Renders welcome page.
+
+    Returns:
+        str: HTML content of the welcome page.
+    """
     return render_template('index.html')
 
 
