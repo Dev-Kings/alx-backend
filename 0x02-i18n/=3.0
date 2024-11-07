@@ -1,0 +1,29 @@
+Collecting Flask==2.2.5
+  Using cached Flask-2.2.5-py3-none-any.whl.metadata (3.9 kB)
+Collecting Flask-Babel==2.0.0
+  Using cached Flask_Babel-2.0.0-py3-none-any.whl.metadata (2.1 kB)
+Collecting Jinja2
+  Using cached jinja2-3.1.4-py3-none-any.whl.metadata (2.6 kB)
+Collecting Werkzeug>=2.2.2 (from Flask==2.2.5)
+  Using cached werkzeug-3.1.2-py3-none-any.whl.metadata (3.7 kB)
+Collecting itsdangerous>=2.0 (from Flask==2.2.5)
+  Using cached itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+Collecting click>=8.0 (from Flask==2.2.5)
+  Using cached click-8.1.7-py3-none-any.whl.metadata (3.0 kB)
+Collecting pytz (from Flask-Babel==2.0.0)
+  Using cached pytz-2024.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting Babel>=2.3 (from Flask-Babel==2.0.0)
+  Using cached babel-2.16.0-py3-none-any.whl.metadata (1.5 kB)
+Collecting MarkupSafe>=2.0 (from Jinja2)
+  Using cached MarkupSafe-3.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+Using cached Flask-2.2.5-py3-none-any.whl (101 kB)
+Using cached Flask_Babel-2.0.0-py3-none-any.whl (9.3 kB)
+Using cached jinja2-3.1.4-py3-none-any.whl (133 kB)
+Using cached babel-2.16.0-py3-none-any.whl (9.6 MB)
+Using cached click-8.1.7-py3-none-any.whl (97 kB)
+Using cached itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Using cached MarkupSafe-3.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
+Using cached werkzeug-3.1.2-py3-none-any.whl (224 kB)
+Using cached pytz-2024.2-py2.py3-none-any.whl (508 kB)
+Installing collected packages: pytz, MarkupSafe, itsdangerous, click, Babel, Werkzeug, Jinja2, Flask, Flask-Babel
+Successfully installed Babel-2.16.0 Flask-2.2.5 Flask-Babel-2.0.0 Jinja2-3.1.4 MarkupSafe-3.0.2 Werkzeug-3.1.2 click-8.1.7 itsdangerous-2.2.0 pytz-2024.2
