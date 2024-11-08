@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """
-Module containing Flask app with Babel setup for internationalization.
-The app has a single route that renders an HTML page.
-A function get_locale is added to get the locale of client based on
-the request's Accept-Language headers.
+Flask app to demonstrate i18n with user-based locale and timezone selection.
 """
 
 from flask import Flask, g, render_template, request
 from flask_babel import Babel, _
-from typing import Optional, Dict
+import pytz
+from pytz import UnknownTimeZoneError
+from typing import Optional, Dict, Any
 
 
 class Config:
@@ -49,6 +48,42 @@ def get_user() -> Optional[Dict[str, str]]:
     if user_id and int(user_id) in users:
         return users[int(user_id)]
     return None
+
+
+@babel.timezoneselector
+def get_timezone() -> str:
+    """
+    Determine the appropriate timezone based on URL, user settings,
+    or default.
+
+    Priority:
+    1. Timezone from URL parameters.
+    2. Timezone from user settings.
+    3. Default to 'UTC' if no valid timezone is found.
+
+    Returns:
+        str: The determined timezone string.
+    """
+    # Check if timezone parameter is in URL and validate it.
+    tz = request.args.get("timezone")
+    if tz:
+        try:
+            pytz.timezone(tz)
+            return tz
+        except UnknownTimeZoneError:
+            pass  # Ignore invalid timezone
+
+    # Check user's preferred timezone if logged in and validate it.
+    if g.user:
+        tz = g.user.get("timezone")
+        if tz:
+            try:
+                pytz.timezone(tz)
+                return tz
+            except UnknownTimeZoneError:
+                pass  # Ignore invalid timezone
+    # Default to UTC
+    return "UTC"
 
 
 @app.before_request
@@ -93,7 +128,7 @@ def index() -> str:
     Returns:
         str: HTML content of the welcome page.
     """
-    return render_template('6-index.html')
+    return render_template('7-index.html')
 
 
 if __name__ == '__main__':
